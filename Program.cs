@@ -16,21 +16,22 @@ foreach (var item in testSelect)
     Console.WriteLine($"Id: {item.Id}   Name: {item.Name}");
 }
 
-                                //Update record
-//var employee = new Employee
-//{
-//    Id = 8,
-//    Name = "Shafik"
+                //Update specific field with PK(Id) and others remain untouched
+//var employee = new EmployeeSurvey {
+//    Id = 8
 //};
-//_context.Employees.Update(employee);
+//_context.Attach(employee);
+//_context.Entry(employee).Property(e => e.Dept).IsModified = true;
+//employee.Dept = "Sales";
 
+//_context.SaveChanges();
 
-                                //AddRangeTransaction
+                    //AddRangeTransaction
 //var AddRange = new AddRange();
 //AddRange.AddRanges();
 
 
-                                //Add record
+                        //Add record
 //var employee2 = new Employee
 //{
 //    Name = "Arsany",
@@ -38,7 +39,7 @@ foreach (var item in testSelect)
 //};
 //_context.Employees.Add(employee2);
 
-                            //Inner join using linq
+                        //Inner join using linq
 var ViewJoin = (from b in _context.Employees
                join a in _context.EmployeeSurveys
                on b.Id equals a.EmployeeId
