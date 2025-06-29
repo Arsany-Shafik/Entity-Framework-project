@@ -13,8 +13,7 @@ namespace ConsoleApp1.database
         public int Id { get; set; }
         public int EmployeeId { get; set; }
         [Required, MaxLength(50)]
-        public bool  Gender { get; set; }
-
+        public bool  Gender { get; set; }         // true = male, false = female
         public int Age { get; set; }
         [Required, MaxLength(100)]
         public string JobLevel { get; set; }
