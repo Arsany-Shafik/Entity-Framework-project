@@ -9,13 +9,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 var _context = new DbContextapp();
 
-var testSelect = _context.Employees.Where(x => x.Name.StartsWith("m")).ToList();
+                  // Retrive all names that begin with letter "M"
+var testSelect = _context.Employees.Where(x => x.Name.StartsWith("M")).ToList();
 foreach (var item in testSelect)
 {
     Console.WriteLine($"Id: {item.Id}   Name: {item.Name}");
 }
 
-//Update record
+                                //Update record
 //var employee = new Employee
 //{
 //    Id = 8,
@@ -62,11 +63,26 @@ foreach (var item in ViewJoin)
     Console.WriteLine($"{item}\n");
 }
 
-                   // StoredProcedure that restore all Names from Employees table
-//var employeesData = _context.Employees.FromSqlRaw("SelectAllCustomers").ToList();
-//foreach (var item in employeesData)
-//{
-//Console.WriteLine($"{item.Name}\n");
-//}
+                // StoredProcedure that restore all Names from Employees table
+var employeesName = _context.Employees.FromSqlRaw("SelectAllEmployeeNames").ToList();
+foreach (var item in employeesName)
+{
+                //return names start with letter "M" with case-sensitive from the stored procedure
+    if (item.Name.StartsWith("M"))
+    {
+    Console.WriteLine($"{item.Name}\n");   
+    }
+}
+
+               // StoredProcedure that restore all data from EmployeeSurveys table
+var employeesyrveys = _context.EmployeeSurveys.FromSqlRaw("SelectAllEmployeeSurveys").ToList();
+foreach (var item in employeesyrveys)
+{
+            //return data of department "IT" from the stored procedure
+    if (item.Dept.Equals("IT"))
+    {
+        Console.WriteLine($"EmployeeId: {item.EmployeeId}    Gender: {(item.Gender ? "Male" : "Female")}    Age: {item.Age}   Dept: {item.Dept}     JobLevel: {item.JobLevel}\n");
+    }
+}
 
 _context.SaveChanges();

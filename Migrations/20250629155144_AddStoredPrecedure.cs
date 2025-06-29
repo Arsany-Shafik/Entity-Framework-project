@@ -11,9 +11,15 @@ namespace ConsoleApp1.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"
-        CREATE PROCEDURE SelectAllCustomers 
+        CREATE PROCEDURE SelectAllEmployeeNames 
         AS
         SELECT * FROM Employees 
+        GO;
+        ");
+            migrationBuilder.Sql(@"
+        CREATE PROCEDURE SelectAllEmployeeSurveys 
+        AS
+        SELECT * FROM EmployeeSurveys
         GO;
         ");
         }
@@ -21,7 +27,8 @@ namespace ConsoleApp1.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DROP PROCEDURE SelectAllCustomers");
+            migrationBuilder.Sql("DROP PROCEDURE SelectAllEmployeeNames");
+            migrationBuilder.Sql("DROP PROCEDURE SelectAllEmployeeSurveys");
         }
     }
 }
